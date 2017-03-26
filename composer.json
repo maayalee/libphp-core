@@ -1,0 +1,22 @@
+{
+  "name":"libphp-core",
+  "version":"0.0.1",
+  "description":"",
+  "autoload": {
+    "psr-4": {
+      "libphp\\":"src/libphp",
+      "libphp\\tests\\":"tests/src/libphp/tests"
+    },
+    "files": [
+    ]
+  },
+  "require": {
+  },
+  "license":"MIT",
+  "authors": [
+    {
+      "name":"Lee, Hyeon-gi",
+      "email":"maaya.lee@gmail.com"
+    }
+  ]
+}
