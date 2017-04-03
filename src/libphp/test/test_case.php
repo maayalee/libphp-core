@@ -5,7 +5,7 @@ class test_case {
   private $test_method_name;
   private $result;
 
-  public function __construct($test_method_name) {
+  public function __construct(string $test_method_name) {
     $this->test_method_name = $test_method_name;
   }
 
@@ -15,32 +15,33 @@ class test_case {
   public function tear_down() {
   }
 
-  protected function assert($expression, $msg = '') {
+  protected function assert(bool $expression, string $msg = '') {
     if (! $expression)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_true($expression, $msg = '') {
+  protected function assert_true(bool $expression, string $msg = '') {
     if (! $expression)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_false($expression, $msg = '') {
+  protected function assert_false(bool $expression, string $msg = '') {
     if ($expression)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_equal($expected, $actual, $msg = '') {
+  protected function assert_equal($expected, $actual, string $msg = '') {
     if ($expected != $actual)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_not_equal($expected, $actual, $msg = '') {
+  protected function assert_not_equal($expected, $actual, string $msg = '') {
     if ($expected == $actual)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_contains($expected_values, $actual, $msg = '') {
+  protected function assert_contains($expected_values, $actual, 
+    string $msg = '') {
     if (! is_array($expected_values))
       $expected_values = array($expected_values);
     
@@ -61,12 +62,13 @@ class test_case {
    * @param array_methods array(string) 생성 클래스가 가지는 메서드 리스트
    * @param array_args array(libs), array(array(libs)) 생성 클래스가 가지는 메서드 파라미터 리스트
    */
-  public function generate_mock($class_name, $parent_class_name, $array_methods, $array_args) {
+  public function generate_mock(string $class_name, string $parent_class_name, 
+    array $array_methods, array $array_args) {
     $gen = new mock_object_generator();
     return $gen->get_mock($class_name, $parent_class_name, $array_methods, $array_args);
   }
 
-  public function run($result) {
+  public function run(test_result $result) {
     $this->result = $result;
     $result->add_run_count();
     $this->run_method();

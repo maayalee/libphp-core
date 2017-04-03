@@ -2,16 +2,12 @@
 namespace libphp\test;
 
 class test_suite {
-  private $suite_name;
-  private $test_cases;
-  private $test_result;
-
-  public function __construct($suite_name) {
+  public function __construct(string $suite_name) {
     $this->suite_name = $suite_name;
     $this->test_cases = array();
   }
 
-  public function add($test_case) {
+  public function add(test_case $test_case) {
     array_push($this->test_cases, $test_case);
   }
 
@@ -29,5 +25,10 @@ class test_suite {
   public function summary() {
     return $this->test_result->summary();
   }
+
+  private $suite_name;
+  private $test_cases;
+  private $test_result;
+
 }
 

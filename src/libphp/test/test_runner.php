@@ -1,18 +1,14 @@
 <?php
 namespace libphp\test;
 
-class test_runner {
-  private $test_suites;
-  private $result;
-  private $short_result;
-
+class test_runner { 
   public function __construct() {
     $this->test_suite = array();
     $this->result  = '';
     $this->short_result = '';
   }
 
-  public function add($test_suite) {
+  public function add(test_suite $test_suite) {
     array_push($this->test_suite, $test_suite);
   }
 
@@ -31,5 +27,10 @@ class test_runner {
   public function summary() {
     return trim($this->result, PHP_EOL);
   }
+
+  private $test_suites;
+  private $result;
+  private $short_result;
+
 }
 

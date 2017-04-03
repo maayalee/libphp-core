@@ -1,14 +1,8 @@
 <?php
 namespace libphp\test;
 
-class test_result {
-  private $test_case_name;
-  private $run_count;
-  private $failed_count;
-  private $failed_messages;
-
-
-  public function __construct($test_case_name) {
+class test_result { 
+  public function __construct(string $test_case_name) {
     $this->test_case_name = $test_case_name;
     $this->run_count = 0;
     $this->failed_count = 0;
@@ -19,7 +13,7 @@ class test_result {
     $this->run_count += 1;
   }
 
-  public function add_failed($method_name, $message) {
+  public function add_failed(string $method_name, string $message) {
     $this->failed_count += 1;
     $this->failed_messages[$method_name] = $message;
   }
@@ -57,5 +51,11 @@ class test_result {
     }
     return $result;
   }
+
+  private $test_case_name;
+  private $run_count;
+  private $failed_count;
+  private $failed_messages;
+
 }
 ?>
