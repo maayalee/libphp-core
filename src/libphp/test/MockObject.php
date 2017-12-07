@@ -1,17 +1,17 @@
 <?php
 namespace libphp\test;
 
-class mock_object {
+class MockObject {
   private $returnVals;
 
   public function  __construct() {
     $this->returnVals = array();
   }
-  public function set_return(string $methodName, $returnVals) {
+  public function setReturn(string $methodName, $returnVals) {
     $this->returnVals[$methodName] = $returnVals;
   }
 
-  public function get_return(string $methodName) {
+  public function getReturn(string $methodName) {
     if (isset($this->returnVals[$methodName]))
       return $this->returnVals[$methodName];
   }

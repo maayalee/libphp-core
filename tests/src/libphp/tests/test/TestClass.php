@@ -1,7 +1,7 @@
 <?php
 namespace libphp\tests\test;
 
-class test_class {
+class TestClass {
   public function foo() {
     return 'foo';
   }

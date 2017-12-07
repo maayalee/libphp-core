@@ -1,18 +1,18 @@
 <?php
 namespace libphp\test;
 
-class test_case {
-  private $test_method_name;
+class TestCase {
+  private $testMethodName;
   private $result;
 
-  public function __construct(string $test_method_name) {
-    $this->test_method_name = $test_method_name;
+  public function __construct(string $testMethodName) {
+    $this->testMethodName = $testMethodName;
   }
 
-  public function set_up() {
+  public function setUp() {
   }
 
-  public function tear_down() {
+  public function tearDown() {
   }
 
   protected function assert(bool $expression, string $msg = '') {
@@ -20,27 +20,27 @@ class test_case {
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_true(bool $expression, string $msg = '') {
+  protected function assertTrue(bool $expression, string $msg = '') {
     if (! $expression)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_false(bool $expression, string $msg = '') {
+  protected function assertFalse(bool $expression, string $msg = '') {
     if ($expression)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_equal($expected, $actual, string $msg = '') {
+  protected function assertEqual($expected, $actual, string $msg = '') {
     if ($expected != $actual)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_not_equal($expected, $actual, string $msg = '') {
+  protected function assertNotEqual($expected, $actual, string $msg = '') {
     if ($expected == $actual)
       throw new \Exception('test failed: ' . $msg);
   }
 
-  protected function assert_contains($expected_values, $actual, 
+  protected function assertContainsl($expected_values, $actual, 
     string $msg = '') {
     if (! is_array($expected_values))
       $expected_values = array($expected_values);
@@ -62,29 +62,29 @@ class test_case {
    * @param array_methods array(string) 생성 클래스가 가지는 메서드 리스트
    * @param array_args array(libs), array(array(libs)) 생성 클래스가 가지는 메서드 파라미터 리스트
    */
-  public function generate_mock(string $class_name, string $parent_class_name, 
+  public function generateMock(string $class_name, string $parent_class_name, 
     array $array_methods, array $array_args) {
-    $gen = new mock_object_generator();
-    return $gen->get_mock($class_name, $parent_class_name, $array_methods, $array_args);
+    $gen = new MockObjectGenerator();
+    return $gen->getMock($class_name, $parent_class_name, $array_methods, $array_args);
   }
 
-  public function run(test_result $result) {
+  public function run(TestResult $result) {
     $this->result = $result;
-    $result->add_run_count();
-    $this->run_method();
+    $result->addRunCount();
+    $this->runMethod();
   }
 
-  private function run_method() {
-    $this->set_up();
+  private function runMethod() {
+    $this->setUp();
     try {
-      call_user_func(array($this, $this->test_method_name));
+      call_user_func(array($this, $this->testMethodName));
     }
     catch (\Exception $e) {
       $message = $e->getMessage();
       $stack = $e->getTraceAsString();
-      $this->result->add_failed($this->test_method_name, "Exception: $message $stack");
+      $this->result->addFailed($this->testMethodName, "Exception: $message $stack");
     }
-    $this->tear_down();
+    $this->tearDown();
   }
 }
 
